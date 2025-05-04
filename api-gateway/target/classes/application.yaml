@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: GREETING-SERVICE
+          uri: lb://GREETING-SERVICE
+          predicates:
+            - Path=/api/greeting/**
+          filters:
+            - StripPrefix=0
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/ms-realm
+
+eureka:
+  instance:
+    prefer-ip-address: true

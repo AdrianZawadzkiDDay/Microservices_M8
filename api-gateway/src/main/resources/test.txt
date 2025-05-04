@@ -1,0 +1,6 @@
+ms-client
+xkpwN4YfDKUF7GFiFukIxOSrZ5Awc14H
+
+curl -X POST http://localhost:9090/realms/ms-realm/protocol/openid-connect/token \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "client_id=ms-client&client_secret=LaM0hx83p85KGRYQXqsQtHZ7lLCwyhMs&grant_type=client_credentials"
