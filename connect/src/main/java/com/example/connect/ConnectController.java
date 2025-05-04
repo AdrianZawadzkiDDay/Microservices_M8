@@ -23,8 +23,20 @@ public class ConnectController {
         return "Health";
     }
 
-    @GetMapping("/token")
-    public String getToken() {
+    @GetMapping("/call-greeting")
+    public String callGreetingWithToken() {
+        String token = fetchAccessToken();
+
+        String greetingResponse = restClient.get()
+                .uri("http://localhost:8080/api/greeting")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                .retrieve()
+                .body(String.class);
+
+        return greetingResponse;
+    }
+
+    private String fetchAccessToken() {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("client_id", "ms-client");
         formData.add("client_secret", "7KI4jGnt31wFP3eHnzbELdLCtKrewpxx");
